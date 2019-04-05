@@ -1,0 +1,31 @@
+{
+  "name": "react-graphql-event-booking",
+  "version": "1.0.0",
+  "description": "Graphql Simple Project ",
+  "main": "index.js",
+  "module": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:start": "nodemon main.js"
+  },
+  "keywords": [
+    "Graphql"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakeshcheekatimala/react-graphql-event-booking"
+  },
+  "bugs": {
+    "url": "https://github.com/rakeshcheekatimala/react-graphql-event-booking/issues"
+  },
+  "author": "Rakesh",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "esm": "^3.2.22",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.2.1",
+    "mongoose": "^5.4.20"
+  }
+}
