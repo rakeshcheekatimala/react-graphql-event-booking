@@ -21,11 +21,14 @@
   "author": "Rakesh",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
     "esm": "^3.2.22",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.2.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.20"
   }
 }
