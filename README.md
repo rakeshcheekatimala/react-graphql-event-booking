@@ -42,4 +42,4 @@ mutation helps to define all the methods related to (POST,DELETE,PATCH,DELETE)
 
 JWT is a type of token-based authentication. For every single request from a client to the server, a token is passed for authentication. It supports the stateless API calls.
 
-![alt text] https://cdn-images-1.medium.com/max/2400/1*3yU_Zbhj9zDZwboFLHS1rg.png
+![ScreenShot](https://cdn-images-1.medium.com/max/2400/1*3yU_Zbhj9zDZwboFLHS1rg.png)
