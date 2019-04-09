@@ -1,5 +1,7 @@
 {
-    "env": {
-        "db_url":"mongodb://127.0.0.1/eventbooking"
-    }
+  "env": {
+    "db_url": "mongodb://127.0.0.1/eventbooking",
+    "secret": "PYYKM+4~,?4i=F%{&'Mz1hLFt{Fp`x",
+    "NODE_ENV": "development"
+  }
 }
