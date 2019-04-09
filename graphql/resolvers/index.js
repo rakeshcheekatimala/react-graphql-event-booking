@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import Event from '../../models/event';
 import User from '../../models/user';
 import Booking from '../../models/booking';
+import jwt from 'jsonwebtoken';
 
 const events = async eventIds => {
   try {
@@ -47,8 +48,14 @@ const singleEvent = async eventId => {
 };
 
 const graphQlResolvers = {
-  events: async () => {
+  events: async (args, context) => {
+    if (!context.req.isAuth) {
+      throw new Error('Not Authenticated or Token Expired');
+    }
     try {
+      let req = context.req;
+
+      console.log("let's test the token ---", req.signedCookies.jwt);
       const events = await Event.find();
       return events.map(event => {
         return {
@@ -62,7 +69,10 @@ const graphQlResolvers = {
       throw err;
     }
   },
-  createEvent: async args => {
+  createEvent: async (args, context) => {
+    if (!context.req.isAuth) {
+      throw new Error('Not Authenticated or Token Expired');
+    }
     const event = new Event({
       title: args.eventInput.title,
       description: args.eventInput.description,
@@ -170,6 +180,46 @@ const graphQlResolvers = {
     } catch {
       throw err;
     }
+  },
+
+  login: async ({ email, password }, context) => {
+    let userExists = await User.findOne({ email: email });
+    if (!userExists) {
+      throw new Error('User Does not Exist');
+    }
+    let isEqual = await bcrypt.compare(password, userExists.password);
+    if (!isEqual) {
+      throw new Error('Password Does not Match');
+    }
+    console.log('The secret key is', process.env.secret);
+    // Once the User is Successful with authentication issue the jwt token
+    const token = jwt.sign(
+      { userId: userExists.id, email: userExists.email, random: Math.random() },
+      process.env.secret,
+      { expiresIn: '1h' }
+    );
+
+    console.log('The Token generated is --', token);
+
+    context.res.cookie('jwt', token, {
+      httpOnly: true,
+      sameSite: true,
+      signed: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
+
+    return {
+      userId: userExists.id,
+
+      expirationTime: 1,
+    };
+  },
+  logout: (args, context) => {
+    context.res.clearCookie('jwt');
+    // clear the cookie stored in the browser when logged in successfully
+    return {
+      email: args.email,
+    };
   },
 };
 
