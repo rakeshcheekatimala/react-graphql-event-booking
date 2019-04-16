@@ -1,3 +1,5 @@
+Sample Project That is Created using Nodejs , Express, Mongodb and Graphql.
+
 # GraphQL
     * It helps to request the data the client is interested for.
     * Every Request is Post request which is embedded with a query expression that client has requested to return.
@@ -36,3 +38,5 @@ mutation helps to define all the methods related to (POST,DELETE,PATCH,DELETE)
     The above snippet invokes the events function in the resolver and returns title.
 
     Note: The names defined in the schema should match with the resolver names.
+
+    
